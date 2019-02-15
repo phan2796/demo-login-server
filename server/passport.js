@@ -100,6 +100,7 @@ passport.use('facebookToken', new FacebookTokenStrategy({
     await newUser.save();
     done(null, newUser);
   } catch (error) {
+    console.log("come on!!!!!!!!!!!!!!!!!")
     done(error, false, error.message);
   }
 }));
