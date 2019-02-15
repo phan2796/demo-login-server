@@ -20,7 +20,9 @@ if (!process.env.NODE_ENV === 'test') {
 }
 
 app.use(bodyParser.json());
-
+app.get('/', (req, res) => {
+  res.send("hello from server!");
+})
 // Routes
 app.use('/users', require('./routes/users'));
 
