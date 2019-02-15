@@ -8,7 +8,9 @@ mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV === 'test') {
   mongoose.connect('mongodb://localhost/APIAuthenticationTEST', { useMongoClient: true });
 } else {
-  mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/APIAuthentication');
+  const url = process.env.MONGODB_URI || 'mongodb://localhost/APIAuthentication'
+  console.log(url)
+  mongoose.connect(url);
 }
 
 const app = express();

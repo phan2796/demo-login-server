@@ -32,19 +32,16 @@ module.exports = {
       tokens: []
     });
 
-    // Generate the token
-    // const token = signToken(newUser);
 
-    // newUser.token = token;
-    // await newUser.save();
-
-    // Respond with token
+    await newUser.save();
     res.status(200).send("Sign up success!!!");
   },
 
   signIn: async (req, res, next) => {
-    // Generate token
     const token = signToken(req.user);
+
+    await User.findOneAndUpdate({ "_id": req.user._id }, { token });
+    // Generate token
     res.status(200).json({ token });
   },
 
@@ -57,7 +54,8 @@ module.exports = {
 
   facebookOAuth: async (req, res, next) => {
     // Generate token
-    const token = signToken(req.user);
+    console.log("facebookOAuth - req.user: ", req.user)
+    const { token } = signToken(req.user);
     res.status(200).json({ token });
   },
 

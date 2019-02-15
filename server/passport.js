@@ -93,7 +93,10 @@ passport.use('facebookToken', new FacebookTokenStrategy({
         email: profile.emails[0].value
       }
     });
+    // Generate the token
+    const token = signToken(newUser);
 
+    newUser.token = token;
     await newUser.save();
     done(null, newUser);
   } catch (error) {
