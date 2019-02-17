@@ -11,16 +11,16 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 // router.route('/signup')
 //   .post(validateBody(schemas.authSchema), UsersController.signUp);
 router.route('/signup')
-  .post(validateBody(schemas.authSchema), UsersController.signUp);
-  
+  .post(validateBody(schemas.authSignUpSchema), UsersController.signUp);
+
 router.route('/signin')
-  .post(validateBody(schemas.authSchema), passportSignIn, UsersController.signIn);
+  .post(validateBody(schemas.authSignInSchema), passportSignIn, UsersController.signIn);
 
 router.route('/oauth/google')
   .post(passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth);
 
 router.route('/oauth/facebook')
-  .post(passport.authenticate('facebookToken', { session: false }), UsersController.facebookOAuth);
+  .post(passport.authenticate('facebookToken'), UsersController.facebookOAuth);
 
 router.route('/secret')
   .get(passportJWT, UsersController.secret);
